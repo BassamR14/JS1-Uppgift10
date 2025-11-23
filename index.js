@@ -4,72 +4,92 @@ let addStudentBtn = document.querySelector("#student-add");
 let studentList = document.querySelector(".student-list");
 let studentInfo = [];
 
+let editIndex = null; // track index we are editing
+
+function addStudent() {
+  let name = studentName.value;
+  let program = document.querySelector("[name=program]:checked")?.value;
+  let city = studentCity.value;
+  let programYear = document.querySelector("[name=year]:checked")?.value;
+
+  if (!name || !program || !programYear || !city) {
+    alert("Not all fields filled.");
+    return;
+  }
+
+  // IF EDITING → save changes to existing student
+  if (editIndex !== null) {
+    studentInfo[editIndex] = {
+      name,
+      program,
+      city,
+      year: programYear,
+    };
+
+    editIndex = null; // clear edit mode
+    addStudentBtn.textContent = "Add Student";
+  }
+  // OTHERWISE → add new student
+  else {
+    studentInfo.push({
+      name,
+      program,
+      city,
+      year: programYear,
+    });
+  }
+
+  render();
+  clearForm();
+}
+
+function clearForm() {
+  studentName.value = "";
+  studentCity.value = "";
+  document
+    .querySelectorAll("[name=program]")
+    .forEach((r) => (r.checked = false));
+  document.querySelectorAll("[name=year]").forEach((r) => (r.checked = false));
+}
+
 function render() {
   studentList.innerHTML = "";
 
   studentInfo.forEach((student, index) => {
     let li = document.createElement("li");
-    li.innerText = `Namn: ${student.name} - Utbildning: ${student.program} - Stad: ${student.city} - År: ${student.year} `;
-    studentList.append(li);
+    li.textContent = `Namn: ${student.name} - Utbildning: ${student.program} - Stad: ${student.city} - År: ${student.year} `;
 
     let deleteButton = document.createElement("button");
-    deleteButton.innerText = "X";
-    li.append(deleteButton);
+    deleteButton.textContent = "X";
 
     let editBtn = document.createElement("button");
-    editBtn.innerText = "Edit";
-    li.append(editBtn);
+    editBtn.textContent = "Edit";
 
-    function deleteItem() {
-      //either remove the li or render the array again.
-      //this only removes the item from the list, but not from the array
-      deleteButton.closest("li").remove();
-      //this removes it from the array, splice(index start,what to remove - so 1 remove exactly ONE element starting at that position)
+    // DELETE
+    deleteButton.addEventListener("click", () => {
       studentInfo.splice(index, 1);
-      //   render();
-    }
+      render();
+    });
 
-    function editItem() {}
+    // EDIT
+    editBtn.addEventListener("click", () => {
+      // Fill form with existing info
+      studentName.value = student.name;
+      studentCity.value = student.city;
+      document.querySelector(
+        `[name=program][value="${student.program}"]`
+      ).checked = true;
+      document.querySelector(
+        `[name=year][value="${student.year}"]`
+      ).checked = true;
 
-    deleteButton.addEventListener("click", deleteItem);
-    editBtn.addEventListener("click", editItem);
+      addStudentBtn.textContent = "Save Changes";
+      editIndex = index; // mark which student we are editing
+    });
+
+    li.append(deleteButton, editBtn);
+    studentList.append(li);
   });
-}
-
-function addStudent() {
-  //save values.
-  let name = studentName.value;
-  //radio buttons need to have a value attribute
-  let program = document.querySelector("[name=program]:checked").value;
-  let city = studentCity.value;
-  let programYear = document.querySelector("[name=year]:checked").value;
-
-  if (
-    //This uses queryselectorall to check if ALL radio buttons for each section is empty
-    // document.querySelectorAll('input[name ="program"]:checked').length === 0 ||
-    // document.querySelectorAll('input[name ="year"]:checked').length === 0 ||
-    // name === ""
-
-    //!name checks if name is empty, null or false. Shorter than above.
-    !name ||
-    !program ||
-    !programYear ||
-    !city
-  ) {
-    alert("Not all Fields have been filled.");
-    return;
-  } else {
-    let newStudent = {
-      name: name,
-      program: program,
-      city: city,
-      year: programYear,
-    };
-    studentInfo.push(newStudent);
-
-    render();
-    console.log(studentInfo);
-  }
 }
 
 addStudentBtn.addEventListener("click", addStudent);
