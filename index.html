@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <section>
+      <label>
+        Name:
+        <input type="text" name="student-name" id="student-name" />
+      </label>
+      <section id="programs">
+        <label>
+          <input type="radio" name="program" value="frontend" />Frontend</label
+        >
+        <label>
+          <input type="radio" name="program" value="backend" />Backend</label
+        >
+        <label>
+          <input type="radio" name="program" value="fullstack" />Fullstack
+        </label>
+      </section>
+      <select name="city" id="city">
+        <option selected hidden></option>
+        <option>Malmö</option>
+        <option>Stockholm</option>
+        <option>Göteborg</option>
+        <option>Lund</option>
+      </select>
+      <section id="program-year">
+        <label><input type="radio" name="year" value="1" />Årskurs 1</label>
+        <label><input type="radio" name="year" value="2" />Årskurs 2</label>
+        <label><input type="radio" name="year" value="3" />Årskurs 3</label>
+      </section>
+      <button type="submit" id="student-add">Add Student</button>
+    </section>
+    <section>
+      <ul class="student-list"></ul>
+    </section>
+  </body>
+</html>
