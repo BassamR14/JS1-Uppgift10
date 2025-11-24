@@ -17,4 +17,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+}
+
+#edit-section {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+  border: 1px solid black;
+  width: max-content;
+  /* margin-left: auto;
+  margin-right: auto; */
+  padding: 20px;
 }

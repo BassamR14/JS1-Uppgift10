@@ -38,6 +38,44 @@
       </section>
       <button type="submit" id="student-add">Add Student</button>
     </section>
+
+    <section id="edit-section">
+      <label>
+        Name:
+        <input type="text" name="new-student-name" id="new-student-name" />
+      </label>
+      <section id="new-programs">
+        <label>
+          <input
+            type="radio"
+            name="new-program"
+            value="frontend" />Frontend</label
+        >
+        <label>
+          <input
+            type="radio"
+            name="new-program"
+            value="backend" />Backend</label
+        >
+        <label>
+          <input type="radio" name="new-program" value="fullstack" />Fullstack
+        </label>
+      </section>
+      <select name="city" id="new-city">
+        <option selected hidden></option>
+        <option>Malmö</option>
+        <option>Stockholm</option>
+        <option>Göteborg</option>
+        <option>Lund</option>
+      </select>
+      <section id="new-program-year">
+        <label><input type="radio" name="new-year" value="1" />Årskurs 1</label>
+        <label><input type="radio" name="new-year" value="2" />Årskurs 2</label>
+        <label><input type="radio" name="new-year" value="3" />Årskurs 3</label>
+      </section>
+      <button type="submit" id="save-changes">Save Changes</button>
+    </section>
+
     <section>
       <ul class="student-list"></ul>
     </section>

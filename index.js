@@ -2,6 +2,7 @@ let studentName = document.querySelector("#student-name");
 let studentCity = document.querySelector("select#city");
 let addStudentBtn = document.querySelector("#student-add");
 let studentList = document.querySelector(".student-list");
+let editSection = document.querySelector("#edit-section");
 let studentInfo = [];
 
 function render() {
@@ -29,7 +30,35 @@ function render() {
       //   render();
     }
 
-    function editItem() {}
+    let myObject = {};
+
+    function editItem() {
+      document.querySelector("#edit-section").style.display = "flex";
+
+      let name = document.querySelector("#new-student-name");
+      let city = document.querySelector("select#new-city");
+      let saveBtn = document.querySelector("#save-changes");
+
+      saveBtn.addEventListener("click", () => {
+        let newName = name.value;
+        let newProgram = document.querySelector(
+          "[name=new-program]:checked"
+        ).value;
+        let newCity = city.value;
+        let newYear = document.querySelector("[name=new-year]:checked").value;
+
+        myObject = {
+          name: newName,
+          program: newProgram,
+          city: newCity,
+          year: newYear,
+        };
+
+        studentInfo.splice(index, 1, myObject);
+        render();
+        document.querySelector("#edit-section").style.display = "none";
+      });
+    }
 
     deleteButton.addEventListener("click", deleteItem);
     editBtn.addEventListener("click", editItem);
@@ -39,7 +68,7 @@ function render() {
 function addStudent() {
   //save values.
   let name = studentName.value;
-  //radio buttons need to have a value attribute
+  //radio buttons need to have a value attribute in HTML
   let program = document.querySelector("[name=program]:checked").value;
   let city = studentCity.value;
   let programYear = document.querySelector("[name=year]:checked").value;
