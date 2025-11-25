@@ -35,28 +35,28 @@ function render() {
     function editItem() {
       document.querySelector("#edit-section").style.display = "flex";
 
-      let name = document.querySelector("#new-student-name");
-      let city = document.querySelector("select#new-city");
       let saveBtn = document.querySelector("#save-changes");
 
       saveBtn.addEventListener("click", () => {
-        let newName = name.value;
-        let newProgram = document.querySelector(
-          "[name=new-program]:checked"
-        ).value;
-        let newCity = city.value;
-        let newYear = document.querySelector("[name=new-year]:checked").value;
+        let newProgram = document.querySelector("[name=new-program]:checked");
+        let newYear = document.querySelector("[name=new-year]:checked");
+        let newName = document.querySelector("#new-student-name").value;
+        let newCity = document.querySelector("select#new-city").value;
 
-        myObject = {
-          name: newName,
-          program: newProgram,
-          city: newCity,
-          year: newYear,
-        };
-
-        studentInfo.splice(index, 1, myObject);
-        render();
-        document.querySelector("#edit-section").style.display = "none";
+        if (!newName || !newProgram || !newCity || !newYear) {
+          alert("not all fields filled");
+          return;
+        } else {
+          myObject = {
+            name: newName,
+            program: newProgram.value,
+            city: newCity,
+            year: newYear.value,
+          };
+          studentInfo.splice(index, 1, myObject);
+          render();
+          document.querySelector("#edit-section").style.display = "none";
+        }
       });
     }
 
@@ -69,9 +69,9 @@ function addStudent() {
   //save values.
   let name = studentName.value;
   //radio buttons need to have a value attribute in HTML
-  let program = document.querySelector("[name=program]:checked").value;
+  let program = document.querySelector("[name=program]:checked");
   let city = studentCity.value;
-  let programYear = document.querySelector("[name=year]:checked").value;
+  let programYear = document.querySelector("[name=year]:checked");
 
   if (
     //This uses queryselectorall to check if ALL radio buttons for each section is empty
@@ -80,6 +80,7 @@ function addStudent() {
     // name === ""
 
     //!name checks if name is empty, null or false. Shorter than above.
+    //check radio buttons have been check but not their value, will cause an error
     !name ||
     !program ||
     !programYear ||
@@ -90,9 +91,9 @@ function addStudent() {
   } else {
     let newStudent = {
       name: name,
-      program: program,
+      program: program.value,
       city: city,
-      year: programYear,
+      year: programYear.value,
     };
     studentInfo.push(newStudent);
 
