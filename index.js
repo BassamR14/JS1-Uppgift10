@@ -33,7 +33,7 @@ function render() {
     let myObject = {};
 
     function editItem() {
-      document.querySelector("#edit-section").style.display = "flex";
+      editSection.style.display = "flex";
 
       let saveBtn = document.querySelector("#save-changes");
 
@@ -55,7 +55,7 @@ function render() {
           };
           studentInfo.splice(index, 1, myObject);
           render();
-          document.querySelector("#edit-section").style.display = "none";
+          editSection.style.display = "none";
         }
       });
     }
