@@ -97,9 +97,57 @@ function addStudent() {
     };
     studentInfo.push(newStudent);
 
+    studentName.value = "";
+    document.querySelector("[name=program]:checked").checked = false;
+
     render();
     console.log(studentInfo);
   }
 }
 
 addStudentBtn.addEventListener("click", addStudent);
+
+/////////////////////////////////////////////////////7
+//Filter
+
+let progDrop = document.querySelector("#program-dropdown");
+let cityDrop = document.querySelector("#city-dropdown");
+let yearDrop = document.querySelector("#year-dropdown");
+let filterBtn = document.querySelector("#filter-btn");
+
+function filterArray() {
+  let programDropValue = progDrop.value;
+  let cityDropValue = cityDrop.value;
+  let yearDropValue = yearDrop.value;
+
+  let filteredList = studentInfo;
+
+  if (programDropValue !== "") {
+    filteredList = filteredList.filter((student) => {
+      console.log(student.program, programDropValue);
+      return student.program === programDropValue;
+    });
+  }
+
+  if (cityDropValue !== "") {
+    filteredList = filteredList.filter(
+      (student) => student.city === cityDropValue
+    );
+  }
+
+  if (yearDropValue !== "") {
+    filteredList = filteredList.filter(
+      (student) => student.year === yearDropValue
+    );
+  }
+
+  studentList.innerHTML = "";
+
+  filteredList.forEach((student) => {
+    let li = document.createElement("li");
+    li.innerText = `Namn: ${student.name} - Utbildning: ${student.program} - Stad: ${student.city} - År: ${student.year} `;
+    studentList.append(li);
+  });
+}
+
+filterBtn.addEventListener("click", filterArray);

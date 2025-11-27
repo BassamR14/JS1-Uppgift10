@@ -15,13 +15,13 @@
       </label>
       <section id="programs">
         <label>
-          <input type="radio" name="program" value="frontend" />Frontend</label
+          <input type="radio" name="program" value="Frontend" />Frontend</label
         >
         <label>
-          <input type="radio" name="program" value="backend" />Backend</label
+          <input type="radio" name="program" value="Backend" />Backend</label
         >
         <label>
-          <input type="radio" name="program" value="fullstack" />Fullstack
+          <input type="radio" name="program" value="Fullstack" />Fullstack
         </label>
       </section>
       <select name="city" id="city">
@@ -49,16 +49,18 @@
           <input
             type="radio"
             name="new-program"
-            value="frontend" />Frontend</label
+            value="Frontend"
+          />Frontend</label
         >
         <label>
           <input
             type="radio"
             name="new-program"
-            value="backend" />Backend</label
+            value="Backend"
+          />Backend</label
         >
         <label>
-          <input type="radio" name="new-program" value="fullstack" />Fullstack
+          <input type="radio" name="new-program" value="Fullstack" />Fullstack
         </label>
       </section>
       <select name="city" id="new-city">
@@ -74,6 +76,32 @@
         <label><input type="radio" name="new-year" value="3" />Årskurs 3</label>
       </section>
       <button type="submit" id="save-changes">Save Changes</button>
+    </section>
+
+    <section class="filter">
+      <select name="program-dropdown" id="program-dropdown">
+        <option value="" selected></option>
+        <option>Frontend</option>
+        <option>Backend</option>
+        <option>Fullstack</option>
+      </select>
+
+      <select name="city-dropdown" id="city-dropdown">
+        <option selected></option>
+        <option>Malmö</option>
+        <option>Stockholm</option>
+        <option>Göteborg</option>
+        <option>Lund</option>
+      </select>
+
+      <select name="year-dropdown" id="year-dropdown">
+        <option value="" selected></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+
+      <button id="filter-btn">Filter</button>
     </section>
 
     <section>
